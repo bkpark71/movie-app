@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import  {useState, useEffect} from 'react';
 
 function App() {
+  let [isLoading, setIsLoading] = useState(true);
+  let [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=1280")
+    .then(response => response.json())
+    .then(json => {
+      setData(json.results);
+      setIsLoading(false);
+    });
+    
+  } ,[]);
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Poketmons!</h1>
+      <hr />
+      {isLoading ? <p>Loading...</p> : null}
+      <ul>
+        {data.map((item, index) => 
+        <li key={item.name}>{item.name}<br />
+        <a href='{item.url}'>{item.url}</a> </li>)}
+      </ul>
+      
+      
     </div>
   );
 }
