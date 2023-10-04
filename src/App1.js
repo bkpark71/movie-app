@@ -8,7 +8,6 @@ import Home from './routes/Home';
 import Detail from './routes/Detail';
 
 function App1() {
-
   return (
     <Router>
       <Routes>
@@ -17,7 +16,6 @@ function App1() {
       </Routes>
     </Router>
   );
-  
 }
 
 export default App1;
